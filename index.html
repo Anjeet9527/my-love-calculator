@@ -2,13 +2,14 @@
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
-    <title>Love Calculator 💖</title>
+    <title>Perfect Love Calculator 💖</title>
     <style>
-        body { font-family: sans-serif; text-align: center; background: #ffe4e1; padding: 20px; }
-        .box { background: white; padding: 30px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 90%; max-width: 300px; }
-        input { width: 90%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; }
-        button { background: #ff4d6d; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }
-        #res { margin-top: 20px; font-weight: bold; color: #d63384; }
+        body { font-family: 'Segoe UI', sans-serif; text-align: center; background: #fce4ec; padding: 20px; }
+        .box { background: white; padding: 30px; border-radius: 20px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.15); width: 90%; max-width: 400px; }
+        input { width: 90%; padding: 12px; margin: 10px 0; border: 2px solid #ec407a; border-radius: 8px; }
+        button { background: #d81b60; color: white; padding: 12px 25px; border: none; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; }
+        #res { margin-top: 25px; font-size: 22px; color: #880e4f; }
+        #shayari { margin-top: 15px; font-size: 16px; color: #4a148c; font-style: italic; line-height: 1.6; }
     </style>
 </head>
 <body>
@@ -16,19 +17,42 @@
         <h1>Love Calculator 💖</h1>
         <input type="text" id="n1" placeholder="आपका नाम">
         <input type="text" id="n2" placeholder="साथी का नाम">
-        <br><br>
-        <button onclick="calc()">Calculate Love 💖</button>
+        <button onclick="calc()">Calculate Love ✨</button>
         <h2 id="res"></h2>
+        <div id="shayari"></div>
     </div>
     <script>
         function calc() {
-            let n1 = document.getElementById('n1').value;
-            let n2 = document.getElementById('n2').value;
-            if(!n1 || !n2) { alert("दोनों नाम लिखें!"); return; }
-            let p = Math.floor(Math.random() * 101);
+            let n1 = document.getElementById('n1').value.trim().toLowerCase();
+            let n2 = document.getElementById('n2').value.trim().toLowerCase();
+            if(!n1 || !n2) { alert("कृपया दोनों नाम भरें!"); return; }
+
+            // यह लॉजिक फिक्स्ड परसेंटेज देगा
+            let sum = 0;
+            let combined = (n1 + n2);
+            for(let i=0; i<combined.length; i++) {
+                sum += combined.charCodeAt(i);
+            }
+            let p = (sum % 100) + 1; // 1 से 100 के बीच फिक्स्ड नंबर
+
+            let msg = "", s = "";
+            if (p < 30) {
+                msg = "अभी प्यार की शुरुआत है! 😅";
+                s = "मंजिलें उन्हीं को मिलती हैं, जिनके सपनों में जान होती है, पंखों से कुछ नहीं होता, हौसलों से उड़ान होती है।";
+            } else if (p < 60) {
+                msg = "बात आगे बढ़ सकती है! ✨";
+                s = "दिल की किताब में गुलाब उनका था, रात की नींद में ख्वाब उनका था, कितना प्यार करते हो जब पूछा हमने, तो मर जाऊंगा कहकर जवाब उनका था।";
+            } else if (p < 85) {
+                msg = "गहरा कनेक्शन है! 💖";
+                s = "हजारों महफिलें हैं और लाखों मेले हैं, लेकिन जहाँ तुम नहीं वहाँ हम अकेले हैं। प्यार में डूबे रहो और साथ निभाते रहो।";
+            } else {
+                msg = "आप मेड फॉर ईच अदर हैं! 💘";
+                s = "तुम्हारी मुस्कान से शुरू होती है मेरी सुबह, तुम ही हो मेरे प्यार की हर एक वजह। रब ने बनाई है ये जोड़ी सबसे अनमोल।";
+            }
+
             document.getElementById('res').innerText = "आपका प्यार: " + p + "%";
+            document.getElementById('shayari').innerText = msg + "\n\n" + s;
         }
     </script>
 </body>
 </html>
-
